@@ -1,211 +1,145 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>花立山養鰻</title>
+<title>花立山養鰻 システム</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
-  background:#080c0a;
+  background:#f0f4f0;
   min-height:100vh;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  font-family:'Noto Serif JP',serif;
+  font-family:'Helvetica Neue',Arial,sans-serif;
   padding:40px 16px;
-  position:relative;
-  overflow:hidden;
 }
-/* 背景の水紋エフェクト */
-body::before{
-  content:'';position:absolute;top:50%;left:50%;
-  width:800px;height:800px;
-  border-radius:50%;
-  border:1px solid rgba(212,175,55,0.06);
-  transform:translate(-50%,-50%);
-  animation:ripple 6s ease-in-out infinite;
-}
-body::after{
-  content:'';position:absolute;top:50%;left:50%;
-  width:600px;height:600px;
-  border-radius:50%;
-  border:1px solid rgba(212,175,55,0.04);
-  transform:translate(-50%,-50%);
-  animation:ripple 6s ease-in-out infinite 2s;
-}
-@keyframes ripple{
-  0%{transform:translate(-50%,-50%) scale(0.95);opacity:0.5;}
-  50%{transform:translate(-50%,-50%) scale(1.05);opacity:1;}
-  100%{transform:translate(-50%,-50%) scale(0.95);opacity:0.5;}
-}
-.header{text-align:center;margin-bottom:48px;position:relative;z-index:1;}
-.header-kanji{
-  font-size:28px;font-weight:900;
-  background:linear-gradient(180deg,#d4af37 0%,#f5d978 50%,#d4af37 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  letter-spacing:6px;margin-bottom:6px;
-}
-.header-sub{font-size:10px;color:rgba(212,175,55,0.5);letter-spacing:4px;}
-.cards{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1;}
+.header{text-align:center;margin-bottom:48px;}
+.header h1{font-size:22px;font-weight:800;color:#1a2e1a;letter-spacing:4px;margin-bottom:6px;}
+.header p{font-size:11px;color:#7aa885;letter-spacing:3px;}
+.cards{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;}
 .card{
   width:260px;
-  background:linear-gradient(145deg,#0f1a12 0%,#0a110d 100%);
-  border:1px solid rgba(212,175,55,0.25);
-  border-radius:4px;
+  background:#fff;
+  border:2px solid #d0e4d0;
+  border-radius:16px;
   cursor:pointer;text-decoration:none;
-  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+  transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;
   display:block;
-  box-shadow:0 4px 24px rgba(0,0,0,0.8), inset 0 1px 0 rgba(212,175,55,0.1);
-  position:relative;
-  overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(212,175,55,0.4),transparent);
+  box-shadow:0 4px 16px rgba(0,0,0,0.08);
 }
 .card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 20px 60px rgba(0,0,0,0.9),0 0 40px rgba(212,175,55,0.08);
-  border-color:rgba(212,175,55,0.5);
+  transform:translateY(-6px);
+  box-shadow:0 12px 32px rgba(0,0,0,0.14);
+  border-color:#2ecc71;
 }
-.card-top{
-  padding:32px 24px 24px;
+.card-body{
+  padding:32px 24px 20px;
   display:flex;flex-direction:column;align-items:center;
-  position:relative;
 }
-.eel-svg{width:180px;height:180px;}
-.card-label{
-  margin-top:16px;
-  padding:6px 20px;
-  border:1px solid rgba(212,175,55,0.3);
-  font-size:11px;color:rgba(212,175,55,0.7);
-  letter-spacing:3px;
-  background:rgba(212,175,55,0.04);
-}
+.eel-svg{width:140px;height:140px;margin-bottom:16px;}
+.card-title{font-size:16px;font-weight:800;color:#1a2e1a;letter-spacing:2px;margin-bottom:6px;}
+.card-sub{font-size:11px;color:#7aa885;letter-spacing:1px;}
 .stamp{
-  position:absolute;top:16px;right:16px;
-  background:#8b1a1a;
-  color:#f5f0e8;font-size:8px;font-weight:700;
-  padding:6px 5px;border-radius:2px;
-  line-height:1.8;text-align:center;
-  writing-mode:vertical-rl;letter-spacing:3px;
-  border:1.5px solid rgba(245,240,232,0.6);
-  box-shadow:0 2px 8px rgba(139,26,26,0.5);
+  display:inline-block;
+  background:#c0392b;color:#fff;
+  font-size:10px;font-weight:700;
+  padding:4px 10px;border-radius:3px;
+  letter-spacing:2px;margin-top:10px;
 }
 .card-footer{
-  border-top:1px solid rgba(212,175,55,0.15);
-  padding:10px 16px;
+  border-top:1px solid #e8f0e8;
+  padding:12px 16px;
   display:flex;align-items:center;gap:8px;
-  background:rgba(0,0,0,0.3);
+  background:#f8fbf8;
+  border-radius:0 0 14px 14px;
 }
-.card-footer .url{font-size:9px;color:rgba(212,175,55,0.4);font-family:monospace;letter-spacing:0.5px;}
-.footer{margin-top:48px;font-size:9px;color:rgba(212,175,55,0.25);letter-spacing:3px;position:relative;z-index:1;}
-/* 区切り線 */
-.divider{width:120px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.3),transparent);margin:0 auto 48px;}
+.card-footer .url{font-size:10px;color:#7aa885;font-family:monospace;}
+.footer{margin-top:48px;font-size:10px;color:#aaa;letter-spacing:2px;}
+@media(max-width:560px){.card{width:100%;max-width:320px;}}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-kanji">花 立 山 養 鰻</div>
-  <div class="header-sub">HANATATE EEL FARM SYSTEMS</div>
+  <h1>花立山養鰻</h1>
+  <p>HANATATE EEL FARM SYSTEMS</p>
 </div>
-<div class="divider"></div>
 
 <div class="cards">
 
   <!-- BMS -->
   <a class="card" href="https://hanatate-bms.vercel.app" target="_blank">
-    <div class="card-top">
-      <div class="stamp">受注<br/>売上<br/>管理</div>
-      <svg class="eel-svg" viewBox="0 0 180 180">
+    <div class="card-body">
+      <svg class="eel-svg" viewBox="0 0 140 140">
         <defs>
-          <radialGradient id="g1" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="rgba(212,175,55,0.03)"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-          <pattern id="wave1" x="0" y="0" width="14" height="7" patternUnits="userSpaceOnUse">
-            <path d="M0 3.5 Q3.5 0 7 3.5 Q10.5 7 14 3.5" fill="none" stroke="rgba(212,175,55,0.2)" stroke-width="0.6"/>
+          <pattern id="w1" x="0" y="0" width="12" height="6" patternUnits="userSpaceOnUse">
+            <path d="M0 3 Q3 0 6 3 Q9 6 12 3" fill="none" stroke="#d0e4d0" stroke-width="0.8"/>
           </pattern>
         </defs>
-        <!-- 背景円グロー -->
-        <circle cx="90" cy="90" r="80" fill="url(#g1)"/>
-        <!-- 波模様 -->
-        <rect x="20" y="120" width="140" height="60" fill="url(#wave1)"/>
-        <!-- 金色の外枠円 -->
-        <circle cx="90" cy="90" r="68" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="1"/>
-        <!-- 墨絵風の太い円（鰻の軌跡） -->
-        <path d="M90 22 A68 68 0 1 1 89.9 22" fill="none" stroke="#1a1a1a" stroke-width="12"
-          stroke-dasharray="380 48" stroke-dashoffset="0" stroke-linecap="round" opacity="0.9"/>
-        <!-- 鰻シルエット（上部を横断） -->
-        <!-- 体 -->
-        <path d="M28 72 Q35 42 60 30 Q90 18 118 30 Q138 40 148 62
-                 Q142 68 134 62 Q118 46 90 38 Q62 30 45 48 Q36 60 38 76Z" fill="#1c1c1c"/>
-        <!-- 頭 -->
-        <ellipse cx="147" cy="66" rx="11" ry="8" fill="#1c1c1c" transform="rotate(25 147 66)"/>
-        <!-- 目 -->
-        <circle cx="152" cy="61" r="2.5" fill="#d4af37" opacity="0.8"/>
-        <circle cx="152" cy="61" r="1.2" fill="#080c0a"/>
-        <!-- ヒレ -->
-        <path d="M100 22 Q106 10 114 17 Q108 24 100 22Z" fill="#1c1c1c"/>
-        <path d="M70 26 Q72 12 80 17 Q77 26 70 26Z" fill="#1c1c1c"/>
-        <!-- しっぽ -->
-        <path d="M32 75 Q16 66 13 80 Q24 88 36 82Z" fill="#1c1c1c"/>
-        <!-- 中央テキスト -->
-        <text x="90" y="84" text-anchor="middle" font-size="26" font-weight="900" fill="#d4af37" font-family="'Helvetica Neue',Arial" opacity="0.9">PS</text>
-        <text x="90" y="99" text-anchor="middle" font-size="8.5" fill="rgba(212,175,55,0.6)" font-family="Arial" letter-spacing="2.5">HANATATE</text>
-        <text x="90" y="114" text-anchor="middle" font-size="11" fill="#8b1a1a" font-family="Arial" font-weight="800" letter-spacing="1">2026</text>
+        <circle cx="70" cy="70" r="65" fill="#f0f8f0"/>
+        <rect x="5" y="90" width="130" height="50" fill="url(#w1)"/>
+        <!-- 円 -->
+        <circle cx="70" cy="70" r="52" fill="none" stroke="#2ecc71" stroke-width="6"
+          stroke-dasharray="290 44" stroke-dashoffset="8" stroke-linecap="round" opacity="0.7"/>
+        <!-- 鰻 -->
+        <path d="M22 58 Q30 32 55 24 Q70 18 88 24 Q108 32 118 52
+                 Q112 58 105 52 Q90 38 70 34 Q50 28 36 46 Q28 56 30 66Z" fill="#1a7a40"/>
+        <ellipse cx="116" cy="56" rx="9" ry="6" fill="#1a7a40" transform="rotate(20 116 56)"/>
+        <circle cx="120" cy="52" r="2" fill="#fff"/>
+        <circle cx="120" cy="52" r="1" fill="#1a7a40"/>
+        <path d="M88 22 Q93 12 100 17 Q96 23 88 22Z" fill="#1a7a40"/>
+        <path d="M55 26 Q57 14 64 18 Q61 26 55 26Z" fill="#1a7a40"/>
+        <path d="M26 65 Q12 58 10 70 Q20 76 28 72Z" fill="#1a7a40"/>
+        <!-- テキスト -->
+        <text x="70" y="68" text-anchor="middle" font-size="22" font-weight="900" fill="#1a2e1a" font-family="Arial">PS</text>
+        <text x="70" y="82" text-anchor="middle" font-size="8" fill="#7aa885" font-family="Arial" letter-spacing="2">HANATATE</text>
+        <text x="70" y="96" text-anchor="middle" font-size="10" fill="#c0392b" font-family="Arial" font-weight="800">2026</text>
       </svg>
-      <div class="card-label">販 売 管 理 シ ス テ ム</div>
+      <div class="card-title">販売管理</div>
+      <div class="card-sub">受注・売上・ふるさと納税</div>
+      <div class="stamp">受注 売上 管理</div>
     </div>
     <div class="card-footer">
-      <span style="font-size:10px;color:rgba(212,175,55,0.4);">🌐</span>
+      <span>🌐</span>
       <span class="url">hanatate-bms.vercel.app</span>
     </div>
   </a>
 
   <!-- ERP -->
   <a class="card" href="https://hanatate-erp2.vercel.app" target="_blank">
-    <div class="card-top">
-      <div class="stamp">現場<br/>管理</div>
-      <svg class="eel-svg" viewBox="0 0 180 180">
+    <div class="card-body">
+      <svg class="eel-svg" viewBox="0 0 140 140">
         <defs>
-          <radialGradient id="g2" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="rgba(212,175,55,0.03)"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-          <pattern id="wave2" x="0" y="0" width="14" height="7" patternUnits="userSpaceOnUse">
-            <path d="M0 3.5 Q3.5 0 7 3.5 Q10.5 7 14 3.5" fill="none" stroke="rgba(212,175,55,0.2)" stroke-width="0.6"/>
+          <pattern id="w2" x="0" y="0" width="12" height="6" patternUnits="userSpaceOnUse">
+            <path d="M0 3 Q3 0 6 3 Q9 6 12 3" fill="none" stroke="#d0e4d0" stroke-width="0.8"/>
           </pattern>
         </defs>
-        <circle cx="90" cy="90" r="80" fill="url(#g2)"/>
-        <rect x="20" y="120" width="140" height="60" fill="url(#wave2)"/>
-        <circle cx="90" cy="90" r="68" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="1"/>
-        <path d="M90 22 A68 68 0 1 1 89.9 22" fill="none" stroke="#1a1a1a" stroke-width="12"
-          stroke-dasharray="380 48" stroke-dashoffset="0" stroke-linecap="round" opacity="0.9"/>
-        <path d="M28 72 Q35 42 60 30 Q90 18 118 30 Q138 40 148 62
-                 Q142 68 134 62 Q118 46 90 38 Q62 30 45 48 Q36 60 38 76Z" fill="#1c1c1c"/>
-        <ellipse cx="147" cy="66" rx="11" ry="8" fill="#1c1c1c" transform="rotate(25 147 66)"/>
-        <circle cx="152" cy="61" r="2.5" fill="#d4af37" opacity="0.8"/>
-        <circle cx="152" cy="61" r="1.2" fill="#080c0a"/>
-        <path d="M100 22 Q106 10 114 17 Q108 24 100 22Z" fill="#1c1c1c"/>
-        <path d="M70 26 Q72 12 80 17 Q77 26 70 26Z" fill="#1c1c1c"/>
-        <path d="M32 75 Q16 66 13 80 Q24 88 36 82Z" fill="#1c1c1c"/>
-        <text x="90" y="84" text-anchor="middle" font-size="26" font-weight="900" fill="#d4af37" font-family="'Helvetica Neue',Arial" opacity="0.9">PS</text>
-        <text x="90" y="104" text-anchor="middle" font-size="12" fill="rgba(212,175,55,0.6)" font-family="Arial" letter-spacing="5" font-weight="700">ERP</text>
+        <circle cx="70" cy="70" r="65" fill="#f0f8f0"/>
+        <rect x="5" y="90" width="130" height="50" fill="url(#w2)"/>
+        <circle cx="70" cy="70" r="52" fill="none" stroke="#2ecc71" stroke-width="6"
+          stroke-dasharray="290 44" stroke-dashoffset="8" stroke-linecap="round" opacity="0.7"/>
+        <path d="M22 58 Q30 32 55 24 Q70 18 88 24 Q108 32 118 52
+                 Q112 58 105 52 Q90 38 70 34 Q50 28 36 46 Q28 56 30 66Z" fill="#1a7a40"/>
+        <ellipse cx="116" cy="56" rx="9" ry="6" fill="#1a7a40" transform="rotate(20 116 56)"/>
+        <circle cx="120" cy="52" r="2" fill="#fff"/>
+        <circle cx="120" cy="52" r="1" fill="#1a7a40"/>
+        <path d="M88 22 Q93 12 100 17 Q96 23 88 22Z" fill="#1a7a40"/>
+        <path d="M55 26 Q57 14 64 18 Q61 26 55 26Z" fill="#1a7a40"/>
+        <path d="M26 65 Q12 58 10 70 Q20 76 28 72Z" fill="#1a7a40"/>
+        <text x="70" y="68" text-anchor="middle" font-size="22" font-weight="900" fill="#1a2e1a" font-family="Arial">PS</text>
+        <text x="70" y="86" text-anchor="middle" font-size="10" fill="#7aa885" font-family="Arial" letter-spacing="4" font-weight="700">ERP</text>
       </svg>
-      <div class="card-label">養 殖 現 場 管 理 シ ス テ ム</div>
+      <div class="card-title">養殖管理</div>
+      <div class="card-sub">池・水質・給餌・死鰻・薬品</div>
+      <div class="stamp">現場管理</div>
     </div>
     <div class="card-footer">
-      <span style="font-size:10px;color:rgba(212,175,55,0.4);">🌐</span>
+      <span>🌐</span>
       <span class="url">hanatate-erp2.vercel.app</span>
     </div>
   </a>
 
 </div>
-
-<div style="width:120px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.3),transparent);margin:48px auto 16px;"></div>
 <div class="footer">© 2026 株式会社花立山養鰻</div>
-
 </body>
 </html>
